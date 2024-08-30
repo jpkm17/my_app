@@ -12,7 +12,6 @@ import {
 
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import Customers from '../pages/Customers';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -12,18 +12,18 @@ import Customers from './pages/Customers';
 
 const App = () => {
   return (
-    <TemplateDefault>
-      <Router>
+    <Router>
+      <TemplateDefault>
         <Switch>
           <Route path="/customers">
-            <TemplatePage title="Clientes" Component={Customers}/>
+            <TemplatePage title="Clientes" Component={Customers} />
           </Route>
           <Route path="/">
             <TemplatePage title="Pagina Inicial" Component={Home}></TemplatePage>
           </Route>
         </Switch>
-      </Router>
-    </TemplateDefault>
+      </TemplateDefault>
+    </Router>
   );
 }
 
