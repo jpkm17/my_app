@@ -7,7 +7,7 @@ import CustomerCard from "../components/CustomerCard"
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     card: {
         margin: theme.spacing(2)
@@ -30,10 +30,8 @@ const Customers = () => {
     }, [])
 
     return (
-        <>
-            <h1>Customers</h1>
-            <Grid container>
-             {
+        <Grid container>
+            {
                 customers.map(item => (
                     <Grid item xs={12} md={4}>
                         <CustomerCard
@@ -45,9 +43,8 @@ const Customers = () => {
                         />
                     </Grid>
                 ))
-             }
-            </Grid>
-        </>
+            }
+        </Grid>
     );
 }
 
