@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 const Register = () => {
     const classes = useStyles()
     const [form, setForm] = useState({
