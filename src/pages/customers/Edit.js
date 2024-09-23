@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField'
+import { useParams } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -12,21 +13,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Register = () => {
+const Edit = () => {
     const classes = useStyles()
+    const { id } = useParams()
+
     const [form, setForm] = useState({
         name: {
-            value: '',
+            value: "",
             error: false,
         },
         job: {
-            value: '',
+            value: "",
             error: false,
         },
     })
 
     const [openToasty, setOpenToasty] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(()=>{
+        axios.get(`https://reqres.in/api/users/${id}`)
+        .then(response =>{
+            const { data } = response.data
+
+            setForm({
+                name: {
+                    value: data.first_name,
+                    error: false,
+                },
+                job: {
+                    value: data.job,
+                    error: false,
+                },
+            })
+           
+        })
+    }, [])
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -71,7 +94,7 @@ const Register = () => {
             return setForm(newFormState)
         }
         
-        axios.post('https://reqres.in/api/users', {
+        axios.put(`https://reqres.in/api/users/${id}`, {
             name: form.name.value,
             job: form.job.value
         }).then((response) =>{
@@ -105,17 +128,17 @@ const Register = () => {
             <div className={classes.wrapper}>
                 <Button variant="contained" color="primary" onClick={handleRegisterButton} disabled={isLoading} >
                 {
-                    isLoading ? "Aguarde..." : "Cadastrar"
+                    isLoading ? "Aguarde..." : "Salvar alterações"
                 }
                 </Button>
                 <Toasty 
                  open={openToasty} 
                  severity="success" 
-                 text="Cadastro Realizado com sucesso!"
+                 text="Registro atualizado com sucesso!"
                  onClose={() => setOpenToasty(false)}/>
             </div>
         </>
     )
 }
 
-export default Register
+export default Edit
